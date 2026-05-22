@@ -21,10 +21,13 @@ def run_preprocessing():
     df_clean = df_clean.drop(columns=[col for col in kolom_buang if col in df_clean.columns])
 
     # 4. Imputasi Missing Values
+    # Untuk numerikal tetap pakai SimpleImputer
     imputer_num = SimpleImputer(strategy='median')
-    imputer_cat = SimpleImputer(strategy='most_frequent')
     df_clean[kolom_numerikal] = imputer_num.fit_transform(df_clean[kolom_numerikal])
-    df_clean[kolom_kategorikal] = imputer_cat.fit_transform(df_clean[kolom_kategorikal])
+
+    # Untuk kategorikal, gunakan Pandas fillna & mode agar tidak ada error konversi string
+    for col in kolom_kategorikal:
+        df_clean[col] = df_clean[col].fillna(df_clean[col].mode()[0])
 
     # 5. Encoding
     df_clean = pd.get_dummies(df_clean, columns=kolom_kategorikal, drop_first=True)
