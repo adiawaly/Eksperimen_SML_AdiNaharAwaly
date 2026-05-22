@@ -8,7 +8,7 @@ def run_preprocessing():
     
     # 1. Load Data Mentah
     # Sesuaikan path karena script ini akan dijalankan dari root repository
-    df = pd.read_csv('dataset_raw/food_delivery.csv')
+    df = pd.read_csv('dataset_raw/synthetic_fooddelivery_dataset.csv')
     df_clean = df.copy()
 
     # 2. Inisialisasi Kolom
