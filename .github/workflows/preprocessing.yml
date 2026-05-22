@@ -3,7 +3,7 @@ name: Data Preprocessing Pipeline
 on:
   push:
     branches:
-      - main  # Action akan berjalan setiap kali ada push ke branch main
+      - main
 
 jobs:
   build:
@@ -11,10 +11,10 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4  
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5  
       with:
         python-version: '3.12.7'
 
@@ -31,7 +31,6 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add preprocessing/dataset_preprocessing/food_delivery_cleaned.csv
-        # Hanya commit jika ada perubahan pada file
+        git add preprocessing/
         git diff --quiet && git diff --staged --quiet || git commit -m "Auto-update cleaned dataset"
         git push
